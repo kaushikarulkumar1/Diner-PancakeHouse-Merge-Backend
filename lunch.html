@@ -3,40 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The merger</title>
-    <link rel="stylesheet" href="navbar.css">
-    <link href="diner.css" rel="stylesheet"/>
+    <title>Lunch</title>
+    <link href="lunch.css" rel="stylesheet"/>
   </head>
   <body>
-    <ul class="topnav">
-      <li><a class="active" href="index.html">Home</a></li>
-      <li><a href="veg.html">Vegetarian Menu</a></li>
-      <li><a href="pancakehouse.html">Breakfast Menu</a></li>
-      <li><a href="lunch.html">Lunch Menu</a></li>        
-      <li><a href="dinner.html">Dinner Menu</a></li>
-      <li class="right"><a class = "active" href="login.html">Login</a></li>
-    </ul>
     <div id="menu" class="container">
-        <h1>All Menu</h1>
+        <h1>Diner Menu</h1>
     </div>
 
     <script>
-      let host = "http://localhost:8080/";
+      let host = "http://localhost:8080";
       let menuDiv = document.getElementById("menu");
 
       displayTheMenu();
 
-      async function getMergedMenu() {
-        let response = await fetch(host);
+      async function getTheMenu() {
+        let response = await fetch(host + "/lunch");
         let menu = await response.json();
         return menu;
       }
 
       async function displayTheMenu() {
-        let menu = await getMergedMenu();
+        let menu = await getTheMenu();
         for (let menuItem of menu) {
           let div = document.createElement("div");
-          div.className = "menu-item"; 
+          div.class = "menu-item";
           div.innerHTML = `
                <div class="menu-item">
                 <div class="item-name">${menuItem.name}</div>
@@ -48,5 +39,5 @@
         }
       }
     </script>
-</body>
+  </body>
 </html>
